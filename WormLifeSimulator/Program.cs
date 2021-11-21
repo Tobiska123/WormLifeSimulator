@@ -26,11 +26,23 @@ namespace WormLifeSimulator
                 {
                     services.AddHostedService<Simulator>();
                     // Служба симулятора мира
-                    services.AddScoped<IFoodGenerator, FoodGenerator>();
+                    services.AddScoped<IWorldBeheviorManager, WorldBeheviorManager>();
+                    services.AddScoped<IFoodGenerator>(provider => {
+                        IWorldBeheviorManager worldService = provider.GetService<IWorldBeheviorManager>();
+                        if(worldService.Exist(args[0]))
+                        {
+                            return new LoadFood(args[0], worldService);
+                        }
+                        else
+                        {
+                            return new FoodGenerator(args[0], worldService);
+                        }
+                       
+                    });
                     services.AddScoped<INameGenerator, NameGenerator>();
                     services.AddScoped<IWormLogic, StupidLogic>();
                     services.AddScoped<ILogger, OutputFileWriter>();
-
+                    services.AddDbContext<AppContext>();
                 });
 
         }

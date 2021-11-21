@@ -1,20 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace WormLifeSimulator
 {
     class FoodGenerator: IFoodGenerator
     {
+
+        private IWorldBeheviorManager worldBeheviorManager;
+        private WorldBehevior worldBehevior;
+        public FoodGenerator(
+            String name,
+            IWorldBeheviorManager worldBeheviorManager
+        ){
+            this.worldBeheviorManager = worldBeheviorManager;
+            this.worldBehevior = this.worldBeheviorManager.Create(name); 
+        }
+
         public (int, int) GetFood(WorldDto data)
         {
-
             while (true)
             {
                 int mX = NextNormal();
                 int mY = NextNormal();
                 if (isFree(mX, mY, data.Worms, data.Foods))
                 {
+                    this.worldBeheviorManager.StoreStep(
+                        this.worldBehevior,
+                        new FoodStep()
+                        {
+                            X = mX,
+                            Y = mY,
+                            Step = data.Step
+                        }
+                    );
                     return (mX, mY);
                 }
                 continue;

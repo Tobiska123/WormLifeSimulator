@@ -14,6 +14,7 @@ namespace WormLifeSimulator
         ILogger logger;
         IFoodGenerator foodGenerator;
         IWormLogic logic;
+        List<FoodStep> foodSteps;
 
         int step;
 
@@ -27,6 +28,7 @@ namespace WormLifeSimulator
             this.logger = logger;
             this.foodGenerator = foodGenerator;
             this.logic = logic;
+            this.foodSteps = new List<FoodStep>();
             this.world = new World();
         }
 
@@ -41,16 +43,27 @@ namespace WormLifeSimulator
             };
         }
 
+        private void makeFood()
+        {
+            var (x, y) = this.foodGenerator.GetFood(this.getDto());
+            this.world.AddFood(x, y);
+            this.foodSteps.Add(new FoodStep() {
+                X = x,
+                Y = y,
+                Step = this.step
+            });
+        }
+
         public void StartSimulation()
         {
             for (this.step = 0; this.step < 100; this.step++)
             {
-                var (x, y) = this.foodGenerator.GetFood(this.getDto());
-                this.world.AddFood(x, y);
+                this.makeFood();
                 this.DoStep();
                 this.world.DecreaseFoods();
                 this.world.ClearWorld();
             }
+
         }
 
 
