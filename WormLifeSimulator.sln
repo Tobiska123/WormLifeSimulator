@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WormLifeSimulator", "WormLifeSimulator\WormLifeSimulator.csproj", "{30E7F1AF-F8C2-440F-9045-9D06BDD0E1EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WormLifeSimulator", "WormLifeSimulator\WormLifeSimulator.csproj", "{30E7F1AF-F8C2-440F-9045-9D06BDD0E1EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicApi", "LogicApi\LogicApi.csproj", "{D0B11CB6-373F-4E61-B074-2DD7C5AF9ED5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{30E7F1AF-F8C2-440F-9045-9D06BDD0E1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30E7F1AF-F8C2-440F-9045-9D06BDD0E1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30E7F1AF-F8C2-440F-9045-9D06BDD0E1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0B11CB6-373F-4E61-B074-2DD7C5AF9ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B11CB6-373F-4E61-B074-2DD7C5AF9ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B11CB6-373F-4E61-B074-2DD7C5AF9ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B11CB6-373F-4E61-B074-2DD7C5AF9ED5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

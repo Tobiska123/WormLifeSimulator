@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using WormLifeSimulator.WormLogic;
 
 namespace WormLifeSimulator
 {
@@ -13,7 +14,7 @@ namespace WormLifeSimulator
 
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
+        public static IHostBuilder CreateHostBuilder(string[] args) 
 
         {
 
@@ -29,18 +30,13 @@ namespace WormLifeSimulator
                     services.AddScoped<IWorldBeheviorManager, WorldBeheviorManager>();
                     services.AddScoped<IFoodGenerator>(provider => {
                         IWorldBeheviorManager worldService = provider.GetService<IWorldBeheviorManager>();
-                        if(worldService.Exist(args[0]))
-                        {
+                        if(worldService.Exist(args[0])){
                             return new LoadFood(args[0], worldService);
                         }
-                        else
-                        {
-                            return new FoodGenerator(args[0], worldService);
-                        }
-                       
+                        return new FoodGenerator(args[0], worldService);
                     });
                     services.AddScoped<INameGenerator, NameGenerator>();
-                    services.AddScoped<IWormLogic, StupidLogic>();
+                    services.AddScoped<IWormLogic, ExternalLogic>();
                     services.AddScoped<ILogger, OutputFileWriter>();
                     services.AddDbContext<AppContext>();
                 });
