@@ -4,12 +4,13 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    class WorldDto
+   public class WorldDto
     {
         public const string Up = "Up";
         public const string Down = "Down";
         public const string Left = "Left";
         public const string Right = "Right";
+        public const string Nothing = "Nothing";
 
         public List<Worm> Worms { get; set; }
         public List<Food> Foods { get; set; }

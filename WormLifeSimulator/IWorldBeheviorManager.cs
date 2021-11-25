@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WormLifeSimulator
 {
-    interface IWorldBeheviorManager
+   public interface IWorldBeheviorManager
     {
         public WorldBehevior Create(String name);
         public void StoreStep(WorldBehevior world , FoodStep foodStep);

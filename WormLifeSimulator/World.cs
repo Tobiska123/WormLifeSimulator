@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace WormLifeSimulator
 {
-    class World
+    public class World
     {
         private List<Worm> worms;
         private List<Food> foods;
@@ -27,17 +27,19 @@ namespace WormLifeSimulator
             Worm worm = new Worm(x, y, name);
             this.worms.Add(worm);
         }
-        public Food AddFood(int x, int y)
+        public void AddFood(int x, int y)
         {
             if (!this.IsPoinFree(x, y))
             {
-                throw new Exception("Point is busy");
+                return;
             }
 
             Food food = new Food(x, y);
             this.foods.Add(food);
-            return food;
+            return;
         }
+
+
 
         public bool IsPoinFree(int x, int y)
         {

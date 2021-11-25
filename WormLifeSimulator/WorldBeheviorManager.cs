@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WormLifeSimulator
 {
-    class WorldBeheviorManager : IWorldBeheviorManager
+    public class WorldBeheviorManager : IWorldBeheviorManager
     {
         private AppContext db;
         public WorldBeheviorManager(

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WormLifeSimulator
 {
-    class FoodStep
+    public class FoodStep
     {
         public int Id { get; set; }
         public int X { get; set; }

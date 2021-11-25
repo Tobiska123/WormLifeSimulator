@@ -9,9 +9,9 @@ using WormLifeSimulator.Entity;
 
 namespace WormLifeSimulator.WormLogic
 {
-    class ExternalLogic : IWormLogic
+    public class ExternalLogic : IWormLogic
     {
-        public (string, bool) GetAction(WorldDto data)
+        public (string, bool) GetAction(Worm worm, WorldDto data)
         {
             WormBehevior tmp = this.Require(data);
             return (tmp.Direction, tmp.Split);

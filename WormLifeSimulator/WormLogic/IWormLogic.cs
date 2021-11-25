@@ -4,8 +4,8 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    interface IWormLogic
+    public interface IWormLogic
     {
-        public (String, bool) GetAction(WorldDto data);
+        public (String, bool) GetAction(Worm worm, WorldDto data);
     }
 }

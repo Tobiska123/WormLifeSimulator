@@ -2,7 +2,7 @@
 
 namespace WormLifeSimulator
 {
-    class AppContext: DbContext
+    public class AppContext: DbContext
     {
 
         public DbSet<WorldBehevior> WorldBeheviors { get; set; }

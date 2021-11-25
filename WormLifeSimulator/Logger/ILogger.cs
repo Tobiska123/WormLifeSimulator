@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    interface ILogger
+    public interface ILogger
     {
         public void Log(WorldDto data);
     }

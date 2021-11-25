@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    interface IFoodGenerator
+    public interface IFoodGenerator
     {
         public (int, int) GetFood(WorldDto data);
     }

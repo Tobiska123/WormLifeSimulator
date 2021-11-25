@@ -15,11 +15,7 @@ namespace WormLifeSimulator
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) 
-
         {
-
-
-
             return Host.CreateDefaultBuilder(args)
 
                 .ConfigureServices((hostContext, services) =>
@@ -36,7 +32,7 @@ namespace WormLifeSimulator
                         return new FoodGenerator(args[0], worldService);
                     });
                     services.AddScoped<INameGenerator, NameGenerator>();
-                    services.AddScoped<IWormLogic, ExternalLogic>();
+                    services.AddScoped<IWormLogic, OptimalLogic>();
                     services.AddScoped<ILogger, OutputFileWriter>();
                     services.AddDbContext<AppContext>();
                 });

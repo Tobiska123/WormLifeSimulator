@@ -4,9 +4,9 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    class StupidLogic : IWormLogic
+    public class StupidLogic : IWormLogic
     {
-        public (string, bool) GetAction(WorldDto data)
+        public (string, bool) GetAction(Worm worm, WorldDto data)
         {
             Random r = new Random();
             if (r.Next() % 2 == 0)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WormLifeSimulator
 {
-    class WorldBehevior
+    public class WorldBehevior
     {
         public int Id { get; set; }
         public String Name { get; set; }

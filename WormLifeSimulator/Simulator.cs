@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace WormLifeSimulator
 {
-    class Simulator :IHostedService
+    public class Simulator : IHostedService
     {
         World world;//некоторый сериализуемый формат данных
         INameGenerator nameGenerator;
         ILogger logger;
         IFoodGenerator foodGenerator;
         IWormLogic logic;
-        List<FoodStep> foodSteps;
 
         int step;
 
@@ -23,17 +22,16 @@ namespace WormLifeSimulator
             ILogger logger,
             IFoodGenerator foodGenerator,
             IWormLogic logic
-        ){
+        ) {
             this.nameGenerator = nameGenerator;
             this.logger = logger;
             this.foodGenerator = foodGenerator;
             this.logic = logic;
-            this.foodSteps = new List<FoodStep>();
             this.world = new World();
         }
 
 
-        private WorldDto getDto()
+        public WorldDto getDto()
         {
             return new WorldDto()
             {
@@ -43,15 +41,12 @@ namespace WormLifeSimulator
             };
         }
 
+        public World World { get; }
+
         private void makeFood()
         {
             var (x, y) = this.foodGenerator.GetFood(this.getDto());
             this.world.AddFood(x, y);
-            this.foodSteps.Add(new FoodStep() {
-                X = x,
-                Y = y,
-                Step = this.step
-            });
         }
 
         public void StartSimulation()
@@ -63,7 +58,7 @@ namespace WormLifeSimulator
                 this.world.DecreaseFoods();
                 this.world.ClearWorld();
             }
-
+            Console.WriteLine(this.world.Worms.Count);
         }
 
 
@@ -85,6 +80,10 @@ namespace WormLifeSimulator
             {
                 return (worm.X + 1, worm.Y);
             }
+            else if (direction.Equals(WorldDto.Nothing))
+            {
+                return (worm.X, worm.Y);
+            }
             else
             {
                 return (worm.X, worm.Y);
@@ -92,41 +91,47 @@ namespace WormLifeSimulator
         }
 
 
+        public void Move(Worm worm, int mX, int mY, bool split)
+        {
+            var field = this.world.GetField(mX, mY);
+
+            if (!(field is Worm))
+            {
+
+                if (split == true)
+                {
+                    this.world.AddWorm(
+                        mX,
+                        mY,
+                        this.nameGenerator.GenerateName(this.getDto())
+                    );
+                    worm.Life -= 10;
+                }
+                else
+                {
+                    worm.X = mX;
+                    worm.Y = mY;
+                }
+            }
+
+            if (field is Food)
+            {
+                worm.Life += 10;
+                this.world.Foods.Remove((Food)field);
+            }
+
+            worm.DecreaseLife();
+        }
+
+
         public void DoStep()
         {
             foreach (Worm worm in this.world.Worms)//Вопрос ToList копирует только списки или обьекты внутри него тоже?
             {
-                var (direction, split) = this.logic.GetAction(this.getDto());
+                var (direction, split) = this.logic.GetAction(worm, this.getDto());
                 var (mX, mY) = this.MbDirection(worm, direction);
 
-                var field = this.world.GetField(mX, mY);
-
-                if (!(field is Worm))
-                {
-
-                    if (split == true)
-                    {
-                        this.world.AddWorm(
-                            mX,
-                            mY,
-                            this.nameGenerator.GenerateName(this.getDto())
-                        );
-                        worm.Life -= 10;
-                    }
-                    else
-                    {
-                        worm.X = mX;
-                        worm.Y = mY;
-                    }
-                }
-
-                if (field is Food)
-                {
-                    worm.Life += 10;
-                    this.world.Foods.Remove((Food)field);
-                }
-
-                worm.DecreaseLife();
+                this.Move(worm, mX, mY, split);
             }
             try
             {

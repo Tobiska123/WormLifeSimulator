@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    class OutputFileWriter : ILogger
+    public class OutputFileWriter : ILogger
     {
         private string path;
         public StreamWriter _output;

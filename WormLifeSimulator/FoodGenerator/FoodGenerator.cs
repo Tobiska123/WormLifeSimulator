@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WormLifeSimulator
 {
-    class FoodGenerator: IFoodGenerator
+    public class FoodGenerator: IFoodGenerator
     {
 
         private IWorldBeheviorManager worldBeheviorManager;

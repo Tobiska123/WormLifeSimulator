@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    class Worm: Field
+    public class Worm: Field
     {
         public String _name;
         

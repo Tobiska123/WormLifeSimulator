@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WormLifeSimulator
 {
-    class LoadFood : IFoodGenerator
+    public class LoadFood : IFoodGenerator
     {
         private IWorldBeheviorManager worldBeheviorManager;
         private WorldBehevior worldBehevior;

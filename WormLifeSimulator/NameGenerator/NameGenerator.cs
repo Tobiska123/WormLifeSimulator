@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    class NameGenerator: INameGenerator
+    public class NameGenerator: INameGenerator
     {
         public String GenerateName(WorldDto world)
         {

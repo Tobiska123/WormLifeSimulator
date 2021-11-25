@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WormLifeSimulator.Entity
 {
-    class WormBehevior
+    public class WormBehevior
     {
         public String Direction { get; set; }
         public bool Split { get; set; }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WormLifeSimulator
+namespace WormLifeSimulator.Tests
 {
-    public interface IFoodGetter
+    class LogicTest
     {
-        public (int, int) Food(WorldDto worldDto);
     }
 }

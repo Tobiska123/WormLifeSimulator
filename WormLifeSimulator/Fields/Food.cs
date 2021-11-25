@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WormLifeSimulator
 {
-    class Food: Field
+    public class Food: Field
     {
         public Food(int x, int y) : base(x, y)
         {}
