@@ -13,24 +13,24 @@ namespace WormLifeSimulator.WormLogic
     {
         public (string, bool) GetAction(Worm worm, WorldDto data)
         {
-            WormBehevior tmp = this.Require(data);
-            return (tmp.Direction, tmp.Split);
+            Task<WormBehevior> tmp = this.RequireAsync(worm, data);
+            return (tmp.Result.direction, tmp.Result.split);
         }
 
-        public WormBehevior Require(WorldDto data)
+        public async Task<WormBehevior> RequireAsync(Worm worm, WorldDto data)
         {
-            String url = "https://localhost:8083/";//todo вынести в конфиг
+            String url = String.Format("http://localhost:8083/{0}/GetAction", worm.Name);//todo вынести в конфиг
             var jsonSerializerOptions = new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
             };
             using (HttpClient client = new HttpClient())
             {
-                    var content = JsonSerializer.Serialize(data);
-                    var stringContent = new StringContent(content, Encoding.UTF8, "application/json");
-                    var task = client.PostAsync(url, stringContent);
-                    task.Wait(100);
-                    return JsonSerializer.Deserialize<WormBehevior>(task.Result.Content.ReadAsStringAsync().Result, jsonSerializerOptions);
+                    string cont = JsonSerializer.Serialize(data);
+                    var stringContent = new StringContent(cont, Encoding.UTF8, "application/json");
+                    var task = await client.PostAsync(url, stringContent);
+                    string result = task.Content.ReadAsStringAsync().Result;
+                    return JsonSerializer.Deserialize<WormBehevior>(task.Content.ReadAsStringAsync().Result, jsonSerializerOptions);
             }
         }
     }

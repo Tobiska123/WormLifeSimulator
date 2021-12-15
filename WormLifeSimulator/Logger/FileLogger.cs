@@ -12,7 +12,7 @@ namespace WormLifeSimulator
 
         public OutputFileWriter()
         {
-            _output = new StreamWriter(@"C:\Users\kir20\source\repos\WormLifeSimulator\log.txt");
+            _output = new StreamWriter(@"C:\Users\kir20\source\repos\WormLifeSimulator\log2.txt");
         }
 
         public void Log(WorldDto data)

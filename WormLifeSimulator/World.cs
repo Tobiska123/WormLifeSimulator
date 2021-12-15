@@ -77,7 +77,7 @@ namespace WormLifeSimulator
 
         public Field GetField(int x, int y)
         {
-            foreach (Worm worm in this.worms)
+            foreach (Worm worm in this.worms)//todo linq
             {
                 if ((worm.X == x) && (worm.Y == y))
                 {
@@ -118,7 +118,7 @@ namespace WormLifeSimulator
 
         public List<Food> Foods
         {
-            get { return this.foods.ToList(); }
+            get { return this.foods; }
         }
     }
 }

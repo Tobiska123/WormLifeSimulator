@@ -8,7 +8,7 @@ namespace WormLifeSimulator.Entity
 {
     public class WormBehevior
     {
-        public String Direction { get; set; }
-        public bool Split { get; set; }
+        public String direction { get; set; }
+        public bool split { get; set; }
     }
 }

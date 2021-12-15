@@ -1,5 +1,6 @@
 ﻿using WormLifeSimulator;
 using NUnit.Framework;
+using Microsoft.EntityFrameworkCore;
 
 namespace WormLifeSimulator
 {
@@ -9,13 +10,16 @@ namespace WormLifeSimulator
         [SetUp]
         public void Setup()
         {
+            var options = new DbContextOptionsBuilder<AppContext>()
+            .UseInMemoryDatabase(databaseName: "MovieListDatabase")
+            .Options;
             _simulator = new Simulator(
                 new NameGenerator(),
                 new OutputFileWriter(),
                 new FoodGenerator(
                     "name",
                     new WorldBeheviorManager(
-                        new AppContext()
+                        new AppContext(options)
                     )
                 ),
                 new StupidLogic()
@@ -53,7 +57,7 @@ namespace WormLifeSimulator
         {
             Worm worm = _simulator.World.Worms[0];
             _simulator.Move(worm, 1, 1, true);
-            Assert.IsTrue((_simulator.World.Worms.Count == 2) && (_simulator.World.Worms[0].Life == 0) && (_simulator.World.Worms[1].Life == 10));
+            Assert.IsTrue((_simulator.World.Worms.Count == 2) && (_simulator.World.Worms[0].Life <= 0) && (_simulator.World.Worms[1].Life == 10));
         }
 
         [Test]
@@ -62,7 +66,9 @@ namespace WormLifeSimulator
             _simulator.World.AddWorm(2, 2, "h");
             Worm worm = _simulator.World.Worms[0];
             _simulator.Move(worm, 2, 2, true);
-            Assert.IsTrue(_simulator.World.Worms.Count == 1);
+            Assert.IsTrue(_simulator.World.Worms.Count == 2);
         }
+
+        //TODO DoStep
     }
 }

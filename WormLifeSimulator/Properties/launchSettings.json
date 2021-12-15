@@ -2,7 +2,7 @@
   "profiles": {
     "WormLifeSimulator": {
       "commandName": "Project",
-      "commandLineArgs": "wb2"
+      "commandLineArgs": "wb45"
     }
   }
 }

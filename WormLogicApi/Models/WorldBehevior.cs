@@ -1,5 +1,5 @@
 ﻿public class Behaviour
 {
-    public string Direction { get; set; }
+    public string Direciton { get; set; }
     public bool Split { get; set; }
 }

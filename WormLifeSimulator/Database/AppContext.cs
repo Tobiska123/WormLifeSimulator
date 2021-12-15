@@ -8,13 +8,16 @@ namespace WormLifeSimulator
         public DbSet<WorldBehevior> WorldBeheviors { get; set; }
         public DbSet<FoodStep> FoodSteps { get; set; }
 
-        public AppContext()
+        public AppContext(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"Server=localhost;Port=5432;Database=SimulatorBehevior;Username=postgres;Password=admin");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseNpgsql(@"Server=localhost;Port=5432;Database=SimulatorBehevior;Username=postgres;Password=admin");
+            }
             //TODO вынести в конфиг файл
             //TODO положить базу в докер
         }

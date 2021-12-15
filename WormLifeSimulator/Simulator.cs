@@ -41,7 +41,7 @@ namespace WormLifeSimulator
             };
         }
 
-        public World World { get; }
+        public World World { get { return world; } }
 
         private void makeFood()
         {
@@ -126,7 +126,7 @@ namespace WormLifeSimulator
 
         public void DoStep()
         {
-            foreach (Worm worm in this.world.Worms)//Вопрос ToList копирует только списки или обьекты внутри него тоже?
+            foreach (Worm worm in this.world.Worms)
             {
                 var (direction, split) = this.logic.GetAction(worm, this.getDto());
                 var (mX, mY) = this.MbDirection(worm, direction);

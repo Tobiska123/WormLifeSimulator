@@ -10,6 +10,10 @@ namespace WormLifeSimulator.WormLogic
     {
         public (string, bool) GetAction(Worm worm, WorldDto data)
         {
+            if (data.Foods.Count <= 0)
+            {
+                return ("Nothing", false);
+            }
             Food closestFood = Utils.ClosestFood(worm, data.Foods);
             Worm closestWorm = Utils.ClosestWorm(closestFood, data.Worms);
             if (worm == closestWorm)

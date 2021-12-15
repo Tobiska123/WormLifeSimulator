@@ -9,9 +9,7 @@ namespace WormLifeSimulator
     {
         public static void Main(string[] args)
         {
-
             CreateHostBuilder(args).Build().Run();
-
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) 
@@ -32,7 +30,7 @@ namespace WormLifeSimulator
                         return new FoodGenerator(args[0], worldService);
                     });
                     services.AddScoped<INameGenerator, NameGenerator>();
-                    services.AddScoped<IWormLogic, OptimalLogic>();
+                    services.AddScoped<IWormLogic, ExternalLogic>();
                     services.AddScoped<ILogger, OutputFileWriter>();
                     services.AddDbContext<AppContext>();
                 });
